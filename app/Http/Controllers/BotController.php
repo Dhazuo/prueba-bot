@@ -23,7 +23,9 @@ class BotController extends Controller
         }
         else if ($bot->stage == 'question_stage') {
             return response()->json([
-                'response' => 'Bienvenido al bot Botsin, te recordamos que ahora debes escoger una de las siguientes opciones.' . "\n" .
+                'response' => "Te damos la bienvenida a nuestro bot de prueba, Botsin." .
+                    "\n" .
+                    "Por favor introduce el número correspondiente a la opción que deseas" . "\n" . "\n" .
                     "1️⃣: Ayuda" . "\n" .
                     "2️⃣: Solicitar mi participación" . "\n" .
                     "3️⃣: Terminar chat"
@@ -60,7 +62,6 @@ class BotController extends Controller
 
         } else if ($current_stage == 'question_stage') {
             $this->assignError($current_stage, $bot);
-
             $bot_logic = new BotLogic;
             $bot_response = $bot_logic->receivedMessage($answer, $current_stage, $this->error);
 
@@ -88,6 +89,10 @@ class BotController extends Controller
                 return response()->json([
                     'bot_response' => $bot_response
                 ]);
+            } else {
+                return response()->json([
+                    'bot_response' => $bot_response
+                ]);
             }
         }
         else if ($current_stage == 'conversation_stage') {
@@ -112,6 +117,10 @@ class BotController extends Controller
                     'stage' => 'salute_stage'
                 ]);
 
+                return response()->json([
+                    'bot_response' => $bot_response
+                ]);
+            } else {
                 return response()->json([
                     'bot_response' => $bot_response
                 ]);
