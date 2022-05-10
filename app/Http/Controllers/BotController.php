@@ -60,7 +60,6 @@ class BotController extends Controller
 
         } else if ($current_stage == 'question_stage') {
             $this->assignError($current_stage, $bot);
-
             $bot_logic = new BotLogic;
             $bot_response = $bot_logic->receivedMessage($answer, $current_stage, $this->error);
 
@@ -88,6 +87,10 @@ class BotController extends Controller
                 return response()->json([
                     'bot_response' => $bot_response
                 ]);
+            } else {
+                return response()->json([
+                    'bot_response' => $bot_response
+                ]);
             }
         }
         else if ($current_stage == 'conversation_stage') {
@@ -112,6 +115,10 @@ class BotController extends Controller
                     'stage' => 'salute_stage'
                 ]);
 
+                return response()->json([
+                    'bot_response' => $bot_response
+                ]);
+            } else {
                 return response()->json([
                     'bot_response' => $bot_response
                 ]);
